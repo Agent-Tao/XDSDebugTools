@@ -2,6 +2,7 @@ package main
 
 import (
 	"XDSDebugTools/debug/server"
+	"XDSDebugTools/debug/server/redis"
 	"context"
 	"fmt"
 	cachev3 "github.com/envoyproxy/go-control-plane/pkg/cache/v3"
@@ -23,7 +24,7 @@ func main() {
 
 	// Create the snapshot that we'll serve to Envoy
 
-	snapshot := server.GenerateSnapshot()
+	snapshot := redis.GenerateSnapshot()
 	if err := snapshot.Consistent(); err != nil {
 		fmt.Errorf("snapshot inconsistency: %+v\n%+v", snapshot, err)
 		os.Exit(1)
